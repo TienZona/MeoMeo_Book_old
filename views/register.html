@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sticky-footer.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <style>
+        #container-reg {
+            background-color: #000;
+        }
+        .btn-reg {
+            background: #84fab0;
+            border: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: all ease .3s;
+            background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+            background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+        }
+        .btn-reg:hover {
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="container-reg" class="container">
+        <style>
+
+        </style>
+        <div class="row">
+            <div class="col-4 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>ĐĂNG KÝ TÀI KHOẢNG</h4>
+                    </div>
+                    <div class="panel-body">
+    
+                        <form class="form-horizontal" role="form" method="POST" action="/register">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                <label class="form-label" for="form3Example1cg">Your Name</label>
+                              </div>
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">Họ và tên</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="Nhập họ và tên"
+                                        value=""  required autofocus>
+    
+                                                                      
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="email" class="col-md-4 control-label">Email</label>
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control" name="email" placeholder="Nhập email"
+                                        value="" required>
+    
+                                           
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="telephone" class="col-md-4 control-label">Số điện thoại</label>
+                                <div class="col-md-6">
+                                    <input id="telephone" type="tel" class="form-control" name="telephone" placeholder="Nhập số điện thoại" required>
+    
+                                                                      
+                                </div>
+                            </div>  
+                            <div class="d-flex flex-">
+                           <div class="form-group">
+                                <label for="password" class="col-md-4 control-label">Mật khẩu</label>
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Nhập mật khẩu" required>                                
+                                </div>
+                            </div>
+    
+                           <div class="form-group">
+                                <label for="password-confirm" class="col-md-4 control-label">Nhập lại mật khẩu:</label>
+                                <div class="col-md-6">
+                                                             
+                                </div>
+                            </div>       
+    
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-success btn-block btn-lg btn-reg text-body">Đăng ký</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
