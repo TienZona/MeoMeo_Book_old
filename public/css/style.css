@@ -75,30 +75,22 @@ body {
 }
 
 .qu-container{
-    background-color: rgba(235, 235, 235, 0.789);
+
 }
 
 .qu-main-container{
-
+    height: 100%;
     margin-left: 40px;
     margin-right: 40px;
     min-height: 1000px;
     padding: 20px;
     
 }
-
-.qu-box-left{
-    width: 78%;
-    float: left;
+.qu-post {
     background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.qu-box-right{
-    width: 20%;
-    float: right;
-    background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .qu-post-head, .qu-post-content{
@@ -325,7 +317,7 @@ body {
     color: #fff;
 }
 .qu-footer{
-    min-height: 400px;
+    height: max-content;
 }
 
 

@@ -30,13 +30,12 @@ function checkLike($id_post, $arrs){
     return false;
 }
 ?>
-
-<div class="qu-container">
-    <div class="qu-main-container">
-        <div class="qu-box-left">
+<div class="container-xl py-4">
+    <div class="row gx-4">
+        <div class="qu-box-left col-9 col-xl-9">
             <div class="qu-post">
                 <div class="qu-post-head bg-light">
-    
+
                     <div class="row">
                         <div class="col-6">
                             <div class="d-flex">
@@ -180,7 +179,7 @@ function checkLike($id_post, $arrs){
                                         </div>
                                         <?php endforeach; ?>
                                     </div>
-                                     
+                                        
                                 </div>
                             </div>
 
@@ -191,22 +190,36 @@ function checkLike($id_post, $arrs){
                 </div>
             </div>
         </div>
-        <div class="qu-box-right ">
-            <div class="qu-post-head bg-light">
-                <h6 class="text-info">Top 10 câu hỏi mới nhất</h6>
-            </div>
-            <div class="qu-top10-post">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <a href=""><img src="" width="30" height="30" class="d-inline-block align-top" alt=""><span class=" text-dark"> Lỗi cài đặt SQL Server 2019 Express Edition?</span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href=""><img src="" width="30" height="30" class="d-inline-block align-top" alt=""><span class=" text-dark"> Lỗi cài đặt SQL Server 2019 Express Edition?</span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href=""><img src="" width="30" height="30" class="d-inline-block align-top" alt=""><span class=" text-dark"> Lỗi cài đặt SQL Server 2019 Express Edition?</span></a>
-                    </li>
-                    </ul>
+        <div class="qu-box-right col-3">
+            <div class="qu-post">
+                <div class="qu-post-head d-flex justify-content-center bg-primary">
+                    <h6 class="text-light mx-1 ">TOP STAR </h6>
+                    <i class="fa-solid mx-1 fa-star" style="color: yellow"></i>
+                </div>
+                <div class="qu-top10-post">
+                    <div class="list-group list-group-flush">
+                        <div class="top-star-item d-flex align-items-center p-2">
+                            <div class="" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                                <img src="img/avatar/<?php echo $avatar; ?>" width="50px" height="50px" class="d-inline-block align-top" alt="">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h5 class=" text-info mx-3 my-0"> <?php echo $username ?></h5>
+                                <span class="text-center">500 <i class="fa-solid mx-1 fa-star" style="color: yellow"></i></span>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="top-star-item d-flex align-items-center p-2">
+                            <div class="" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                                <img src="img/avatar/<?php echo $avatar; ?>" width="50px" height="50px" class="d-inline-block align-top" alt="">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h5 class=" text-info mx-3 my-0"> <?php echo $username ?></h5>
+                                <span class="text-center">500 <i class="fa-solid mx-1 fa-star" style="color: yellow"></i></span>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

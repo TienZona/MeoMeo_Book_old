@@ -80,8 +80,15 @@
             </div>
         </div>
     </div>    
+    
+
+    <div id="container" style="margin-top: 50px; height: auto">
+        <?=$this->section("page")?>
+
+    </div>
+
     <div class="qu-footer bg-info p-4">
-        <div class="container">
+        <div class="container-xl">
             <h2 class="qu-footer__head text-center text-white">QUESTION WEB <hr class="qu-footer__hr"></h2>
             <div class="qu-footer__content">
                 <div class="row p-2">
@@ -124,14 +131,8 @@
                 <span class="text-white ">Bản quyền &copy; QUESTION WEB</span>
             </div>
         </div>
-        
     </div>
 
-
-    <div id="container" style="margin-top: 50px">
-        <?=$this->section("page")?>
-
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
