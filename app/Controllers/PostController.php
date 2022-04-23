@@ -24,7 +24,7 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = Post::orderBy('created_at', 'desc')->get();
+		$posts = Post::getAllPost();
 		$newPost = [];
 		foreach($posts as $post){
 			$id = $post['id_user'];
@@ -34,15 +34,16 @@ class PostController extends Controller
 			$post['username'] = $username;
 			$post['avatar'] = $avatar;
 			
-			$comments = Comment::where('id_post', $id_post)->orderBy('created_at', 'desc')->get();
+			$comments = Comment::getCommentOfPost($id_post);
 			$newComments = [];
 
-			$numberLike = Like::where('id_post', $id_post)->count();
+			$numberLike = Like::numberLike($id_post);
 			$post['number_like'] = $numberLike;
 
 			foreach($comments as $comment){
 				$comment['username'] = User::getUsername($comment['id_user']);
 				$comment['avatar'] = User::getAvatar($comment['id_user']);
+				$comment['star'] = Star::numberStarOfUser($comment['id_user']);
 				array_push($newComments, $comment);
 			}
 			
@@ -51,16 +52,46 @@ class PostController extends Controller
 			array_push($newPost, $post);
 		}
 		$id_user = $_SESSION['user_id'];
+
+		$stars = Star::getUserHasStar();
+		$topStars = [];
+		foreach($stars as $star){
+			$id = $star['id_user'];
+			$number = Star::numberStarOfUser($id);
+			$user = User::getUser($id);
+			$user['number_star'] = $number;
+			array_push($topStars, $user);
+		}
+		$topStars = $this->sort($topStars);
 		$this->sendPage('home', [ 
 			'posts' =>  $newPost,
-			'postLikes' =>  Like::where('id_user', $id_user)->get()
+			'postLikes' =>  Like::getLikeOfUser($id_user),
+			'topStars' => $topStars
 		]); 
+	}
+
+	public function sort($arr){
+		$n = count($arr);
+		for ( $i = 0; $i < $n; $i++ )
+		{
+			for ($j = 0; $j < $n; $j++ )
+			{
+				if ((int)$arr[$i]['number_star'] > (int)$arr[$j]['number_star'])
+				{
+					$temp = $arr[$i];
+					$arr[$i] = $arr[$j];
+					$arr[$j] = $temp;
+				}
+			}
+		}
+		return $arr;
 	}
 
     public function newPost(){
         $data = $_POST;
 		$err = Post::validate($data);
 		if(!empty($_FILES["file"]["tmp_name"])){
+			$target_dir = "img/post/";
 			include 'upload.php';
 			$image = basename($_FILES["file"]["name"]);
 			if(!$uploadOk){
@@ -129,12 +160,10 @@ class PostController extends Controller
 	}
 
 	public function star(){
-		$test = Star::where('id_assessor',16)->where('id_user',16)->where('id_post',72)->get();
-		echo $test;
 		if(isset($_POST['id_post']) && isset($_POST['id_user'])){
 			$id_post = $_POST['id_post'];
-			$id_user = $_POST['id_user'];
-			$id_assessor = Post::find($id_post)['id_user'];
+			$id_assessor = $_POST['id_user'];
+			$id_user = $_POST['id_assessor'];
 			if(!Star::check($id_post, $id_user, $id_assessor)){
 				$this->createStar($id_post, $id_user, $id_assessor);
 			}

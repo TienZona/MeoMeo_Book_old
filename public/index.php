@@ -42,7 +42,17 @@ $router->get('/starUser', '\App\Controllers\PostController@star');
 // comment
 $router->post('/addComment', '\App\Controllers\PostController@addComment');
 
+// profile
+$router->get('/profile', '\App\Controllers\ProfileController@index');
+$router->post('/updateProfile?.*', '\App\Controllers\ProfileController@update');
+$router->post('/newPassword?.*', '\App\Controllers\ProfileController@newPass');
+$router->post('/updateAvatar?.*', '\App\Controllers\ProfileController@updateAvatar');
 
+
+
+
+
+// not found
 $router->set404('\App\Controllers\Controller@sendNotFound');
 
 $router->run();

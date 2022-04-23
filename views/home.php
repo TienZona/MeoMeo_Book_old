@@ -7,21 +7,6 @@
 $username = $_SESSION['user_name'];
 $avatar = $_SESSION['user_avatar'];
 $user_id = $_SESSION['user_id'];
-
-if(isset($_SESSION['errors'])){
-    $errs = $_SESSION['errors'];
-    foreach($errs as $err){
-        echo "<script>alert('$err')</script>";
-    }
-    unset($_SESSION['errors']);
-}
-if(isset($_SESSION['messages'])){
-    $messages = $_SESSION['messages'];
-    $mess = $messages['success'];
-    echo "<script>alert('$mess')</script>";
-    unset($_SESSION['messages']);
-}
-
 function checkLike($id_post, $arrs){
     foreach($arrs as $item){
         if($item['id_post'] == $id_post)
@@ -46,7 +31,7 @@ function checkLike($id_post, $arrs){
                             </div>
                         </div>
                         <div class="col-6">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#modal">
+                            <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal">
                                 <div class="box-post text-center">
                                     <span class="text-secondary p-4"  data-bs-dismiss="modal">Chào bạn, đặt câu hỏi vào đây?</span>
                                 </div>
@@ -75,7 +60,7 @@ function checkLike($id_post, $arrs){
                                                 <div class="modal-body__content my-3">
                                                     <textarea name="content" class="area-content" cols="53" rows="1" placeholder="Nhập câu hỏi"></textarea>
                                                     <div class="">
-                                                        <img id="image" class="mb-3" src="./img/cai-dat-sql-server-2019.png" alt="" width="100%">
+                                                        <img id="image" class="mb-3" src="" alt="" width="100%">
                                                         <span>Thêm ảnh: <input id="file-upload" name="file" type="file"></span>
                                                         
                                                     </div>
@@ -124,7 +109,9 @@ function checkLike($id_post, $arrs){
                                 <hr>
                                 <div class="post-item__content">
                                     <p class="post-content fs-5 mx-3 fw-bold"><?= $post['content'] ?></p>
+                                    <?php if($post['image'] != '') : ?>
                                     <img class="post-img" src="img/post/<?= $post['image'] ?>" alt="">
+                                    <?php endif; ?>
                                 </div>
                                 <hr>
                                 <div class="post-item__interactive">
@@ -143,10 +130,11 @@ function checkLike($id_post, $arrs){
                                         <div class="head-info__img col-2">
                                             <img src="/img/avatar/<?=$avatar?>" alt="">
                                         </div>
-                                        <div class="col-10 d-flex justify-content-between">
-                                            <textarea name="content" class="comment-content px-3 area-content" cols="70" rows="1" placeholder="Nhập bình luận của bạn"></textarea>
-                                            <button type="submit" class="btn-comment btn btn-primary" onclick="handleComment(this, <?= $id_post ?>, <?= $user_id ?>)">Bình luận</button>
+                                        <div class="col-8 d-flex justify-content-between">
+                                            <textarea name="content" require class="comment-content px-3 area-content" cols="70" rows="1" placeholder="Nhập bình luận của bạn"></textarea>
                                         </div>
+                                        <button type="submit" class="btn-comment btn btn-primary col-2" 
+                                            onclick="handleComment(this, <?= $id_post ?>, <?= $user_id ?>)">Bình luận</button>
                                     </div>
                                     <div id="comment" class="mx-2">
                                             <span class="comment__quantity"><?= count($post['comments']) ?></span>
@@ -161,6 +149,11 @@ function checkLike($id_post, $arrs){
                                                     <img src="img/avatar/<?= $comment['avatar'] ?>" alt="">
                                                 </div>
                                                 <h5 class="fs-5 text-primary px-2 m-0"><?= $comment['username'] ?></h5>
+                                                <div class="vote-item px-3">
+                                                    <i class="vote-star icon-vote fa-regular fa-star" 
+                                                    onclick="starUser(this, <?= $id_post ?>, <?= $comment['id_user'] ?>, <?= $user_id ?>)"></i>
+                                                    <span class="vote-star-quantity"><?= $comment['star'] ?></span>
+                                                </div>
                                                 <span class="mx-3"><?= $comment['created_at'] ?></span>
                                             </div>
                                             <div class="mx-5">
@@ -169,12 +162,9 @@ function checkLike($id_post, $arrs){
                                             <div class="vote-list d-flex mx-5">
                                                 <div class="vote-item px-3">
                                                     <i class="vote-like icon-vote fa-regular fa-thumbs-up"></i> 
-                                                    0
+                                                    <span class="vote-like-quantity">0</span>
                                                 </div>
-                                                <div class="vote-item px-3">
-                                                    <i class="vote-star icon-vote fa-regular fa-star" onclick="starUser(this, <?= $id_post ?>, <?= $user_id ?>)"></i>
-                                                    0
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <?php endforeach; ?>
@@ -193,31 +183,23 @@ function checkLike($id_post, $arrs){
         <div class="qu-box-right col-3">
             <div class="qu-post">
                 <div class="qu-post-head d-flex justify-content-center bg-primary">
-                    <h6 class="text-light mx-1 ">TOP STAR </h6>
+                    <h6 class="text-light mx-1 my-0">TOP STAR </h6>
                     <i class="fa-solid mx-1 fa-star" style="color: yellow"></i>
                 </div>
                 <div class="qu-top10-post">
                     <div class="list-group list-group-flush">
+                        <?php foreach($topStars as $user): ?>
                         <div class="top-star-item d-flex align-items-center p-2">
-                            <div class="" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-                                <img src="img/avatar/<?php echo $avatar; ?>" width="50px" height="50px" class="d-inline-block align-top" alt="">
+                            <div class="" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden">
+                                <img src="img/avatar/<?= $user['avatar']; ?>" width="100%" height="100%" class="d-inline-block align-top" alt="">
                             </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <h5 class=" text-info mx-3 my-0"> <?php echo $username ?></h5>
-                                <span class="text-center">500 <i class="fa-solid mx-1 fa-star" style="color: yellow"></i></span>
+                            <div class="justify-content-center mx-1" width="100%">
+                                <h6 class=" text-info my-0"> <?= $user['name'] ?></h6>
+                                <span class="text-center"> <?= $user['number_star'] ?> <i class="fa-solid mx-1 fa-star" style="color: yellow"></i></span>
                             </div>
                         </div>
                         <hr class="m-0">
-                        <div class="top-star-item d-flex align-items-center p-2">
-                            <div class="" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-                                <img src="img/avatar/<?php echo $avatar; ?>" width="50px" height="50px" class="d-inline-block align-top" alt="">
-                            </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <h5 class=" text-info mx-3 my-0"> <?php echo $username ?></h5>
-                                <span class="text-center">500 <i class="fa-solid mx-1 fa-star" style="color: yellow"></i></span>
-                            </div>
-                        </div>
-                        <hr class="m-0">
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -261,16 +243,21 @@ function checkLike($id_post, $arrs){
 
     function handleComment(item, id_post, id_user){
         const areaText = item.parentElement.querySelector('.comment-content');
-        $.ajax({
-            url: '/addComment',
-            method: "POST",
-            data: {id_post: id_post, id_user: id_user, content: areaText.value},
-            cache: false,
-            error: function(xhr ,text){
-                alert('Đã có lỗi: ' + text);
-            }
-        });
-        location.reload();
+        if(areaText.value != ''){
+            $.ajax({
+                url: '/addComment',
+                method: "POST",
+                data: {id_post: id_post, id_user: id_user, content: areaText.value},
+                cache: false,
+                error: function(xhr ,text){
+                    alert('Đã có lỗi: ' + text);
+                }
+            });
+            location.reload();
+        }else{
+            alert('Bạn chưa nhập bình luận!');
+        }
+        
     }
 
      // sử lý đăng bài
@@ -315,32 +302,39 @@ function checkLike($id_post, $arrs){
             if(item.classList.contains("fa-regular")){
                 item.classList.remove('fa-regular');
                 item.classList.add('fa-solid')
+                const numberElement = item.parentElement.querySelector('.vote-like-quantity');
+                const number = parseInt(numberElement.innerHTML) + 1;
+                numberElement.innerHTML = number;
             }else{
                 item.classList.remove('fa-solid')
                 item.classList.add('fa-regular');
+                const numberElement = item.parentElement.querySelector('.vote-like-quantity');
+                const number = parseInt(numberElement.innerHTML) - 1;
+                numberElement.innerHTML = number;
             }
         }
     })
 
-    function starUser(item, id_post, id_user){
+    function starUser(item, id_post, id_assessor, id_user){
         const data = {
             id_post: id_post,
-            id_user: id_user
+            id_user: id_user,
+            id_assessor: id_assessor
         }
         if(item.classList.contains("fa-solid")){
             item.classList.remove('fa-solid');
             item.classList.add('fa-regular');
-            // const numberElement = item.parentElement.querySelector('.interactive-like__quantity');
-            // const number = parseInt(numberElement.innerHTML) - 1;
-            // numberElement.innerHTML = number;
+            const numberElement = item.parentElement.querySelector('.vote-star-quantity');
+            const number = parseInt(numberElement.innerHTML) - 1;
+            numberElement.innerHTML = number;
             postAjax('/unstarUser', data);
 
         }else{
             item.classList.remove('fa-regular');
             item.classList.add('fa-solid');
-            // const numberElement = item.parentElement.querySelector('.interactive-like__quantity');
-            // const number = parseInt(numberElement.innerHTML) + 1;
-            // numberElement.innerHTML = number;
+            const numberElement = item.parentElement.querySelector('.vote-star-quantity');
+            const number = parseInt(numberElement.innerHTML) + 1;
+            numberElement.innerHTML = number;
             postAjax('/starUser', data);
             
         }

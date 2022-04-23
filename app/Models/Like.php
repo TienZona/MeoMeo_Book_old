@@ -21,4 +21,15 @@ class Like extends Model
         Like::where('id_post',$id_post)->where('id_user',$id_user)->delete();
     }
 
+    public static function deleteLike($id_post){
+        Like::find('id_post', $id_post)->delete();
+    }
+
+    public static function numberLike($id_post){
+        return Like::where('id_post', $id_post)->count();
+    }
+
+    public static function getLikeOfUser($id_user){
+        return Like::where('id_user', $id_user)->get();
+    }
 }

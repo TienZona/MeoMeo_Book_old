@@ -26,8 +26,12 @@ class Post extends Model
         return $comments;
     }
 
+    public static function getAllPost(){
+        return Post::where('deleted', 'not', 1)->orderBy('created_at', 'desc')->get();
+    }
+
     public static function deletePost($id_post){
-        Post::find($id_post)->delete();
+        Post::where('id',$id_post)->update(['deleted' => 1]);
     }
 
 

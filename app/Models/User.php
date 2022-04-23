@@ -7,7 +7,7 @@ use App\Models\Post;
 class User extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password', 'birthdate', 'sex'];
+    protected $fillable = ['name', 'email', 'password', 'birthdate', 'sex', 'avatar'];
 
     public static function validate(array $data) {
         $errors = [];
@@ -31,6 +31,10 @@ class User extends Model
         return $errors;
     }   
 
+    public static function getUser($id_user){
+        return User::find($id_user);
+    }
+
     public static function getUsername($id_user){
         $user = User::find($id_user);
         return $user['name'];
@@ -39,6 +43,22 @@ class User extends Model
     public static function getAvatar($id_user){
         $user = User::find($id_user);
         return $user['avatar'];
+    }
+
+    public static function updateUser($id, $data){
+        User::find($id)->update($data);
+    }
+
+    public static function getPassword($id){
+        return User::find($id)->password;
+    }
+
+    public static function updatePassword($id, $password){
+        User::find($id)->update(['password' => $password]);
+    }
+
+    public static function updateAvatar($id, $avatar){
+        User::find($id)->update(['avatar' => $avatar]);
     }
 
 }

@@ -9,23 +9,43 @@
 
     <!-- Styles -->
     <link href="library/bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=1.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.5">
     <link rel="stylesheet" href="/fonts/fontawesome-free-6.1.1-web/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="library/bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <script src="library/jQuery.js"></script>
+    <script src="js/jQuery.js"></script>
+    <script src="js/jquery.validater.js"></script>
+    
 
     <?=$this->section("page_specific_css")?>
+    <?php 
+    if(isset($_SESSION['errors'])){
+        $errs = $_SESSION['errors'];
+        foreach($errs as $err){
+            echo "<script>alert('$err')</script>";
+        }
+        unset($_SESSION['errors']);
+    }
+    if(isset($_SESSION['messages'])){
+        $messages = $_SESSION['messages'];
+        $mess = $messages['success'];
+        echo "<script>alert('$mess')</script>";
+        unset($_SESSION['messages']);
+    }
+    ?>
 </head>
 <body>
     <div class="qu-header">
         <div class="qu-main-header">
             <div class="container">
                 <div class="row nav-bar"> 
-                    <div class="col nav-item">
-                        <a href="/home" class="qu-logo text-white">QUESTION WEB</a>
+                    <div class="col-4 nav-item">
+                        <a href="/home" class="qu-logo text-white text-decoration-none fs-5">
+                            <img src="/img/logo_meomeo.png" alt="" height="40px" >
+                            MeoMeo
+                        </a>
                     </div>
-                    <div class="col nav-item">
+                    <div class="col-4 nav-item">
                         <div class="search">
                             <form class="form form-search"> 
                                 <input type="text" class="px-3" placeholder="Search anything...">
@@ -35,7 +55,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col nav-item ">
+                    <div class="col-4 nav-item ">
                         <nav class="nav justify-content-end">
                             <a class="qu-nav text-white nav-link nav-notify" href="#">
                                 <i class="fa-solid fa-bell"></i> 
@@ -60,7 +80,7 @@
                                 <i class="fa-solid fa-user"></i> 
                                 <?=$this->e(\App\SessionGuard::user()->name)?>
                                 <div class="box-user">
-                                    <a href="#" class='user-box__content-item text-decoration-none mb-2'>
+                                    <a href="/profile" class='user-box__content-item text-decoration-none mb-2'>
                                         <i class='fas fa-user-circle'></i>
                                         <span class="mx-2">Tài khoản của tôi</span>
                                     </a>
@@ -82,7 +102,7 @@
     </div>    
     
 
-    <div id="container" style="margin-top: 50px; height: auto">
+    <div id="container" >
         <?=$this->section("page")?>
 
     </div>

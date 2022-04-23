@@ -1,5 +1,4 @@
 <?php
-$target_dir = "img/post/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $uploadOk = 1;
 $hasExist = 0;

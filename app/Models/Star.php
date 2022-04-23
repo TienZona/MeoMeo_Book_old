@@ -21,4 +21,20 @@ class Star extends Model
         Star::where('id_assessor',$id_assessor)->where('id_user',$id_user)->where('id_post',$id_post)->delete();
     }
 
+
+    public static function deleteStar($id_post){
+        Star::find('id_post', $id_post)->delete();
+    }
+
+    public static function getStar($id_post, $id_user, $id_assessor){
+        return Star::where('id_assessor',$id_assessor)->where('id_user',$id_user)->where('id_post',$id_post)->get();
+    }
+
+    public static function numberStarOfUser($id_user){
+        return Star::where('id_user',$id_user)->get()->count();
+    }
+
+    public static function getUserHasStar(){
+        return Star::groupby('id_user')->distinct()->get();
+    }
 }
