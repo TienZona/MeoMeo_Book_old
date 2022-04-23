@@ -6,7 +6,7 @@
 <?php $this->start("page")?>
 <div id="container">
     <div class="container pt-md-5">
-        <div class="row mb-5">
+        <div class="row pb-xl-5">
             <div class="col-lg-4">
                 <div class="card" style="border: unset; background-color: unset;">
                     <div id="profile" class="card-body">

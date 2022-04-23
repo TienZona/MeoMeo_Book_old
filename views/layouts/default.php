@@ -42,7 +42,7 @@
                     <div class="col-4 nav-item">
                         <a href="/home" class="qu-logo text-white text-decoration-none fs-5">
                             <img src="/img/logo_meomeo.png" alt="" height="40px" >
-                            MeoMeo
+                            MEOMEO
                         </a>
                     </div>
                     <div class="col-4 nav-item">
@@ -109,7 +109,7 @@
 
     <div class="qu-footer bg-info p-4">
         <div class="container-xl">
-            <h2 class="qu-footer__head text-center text-white">QUESTION WEB <hr class="qu-footer__hr"></h2>
+            <h2 class="qu-footer__head text-center text-white">MEOMEO <hr class="qu-footer__hr"></h2>
             <div class="qu-footer__content">
                 <div class="row p-2">
                     <div class="col-sm-3">

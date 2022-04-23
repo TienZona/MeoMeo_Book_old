@@ -1,8 +1,8 @@
 <?php $this->layout("layouts/default", ["title" => "MeoMeo"]) ?>
 
 <?php $this->start("page") ?>
-<div class="container">
-  <section class=" bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp'); padding: 100px 0">
+<div class="container py-5">
+  <section class=" bg-image">
     <div class="mask d-flex align-items-center gradient-custom-3">
       <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
